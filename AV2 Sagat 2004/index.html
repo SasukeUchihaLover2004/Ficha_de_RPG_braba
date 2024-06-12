@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de RPG MUITO DIVERTIDA LOL</title>
+    <style>
+    input[type=number],input[type=text] {
+        border: 2px solid black;
+        height: 16pt;
+        border-radius: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        width: 24pt;
+    }
+     
+    input[type=text] {
+        width: 144pt;
+    }
+     
+    label, body {
+        font-family: sans-serif;
+        font-size: 14pt;
+        color: black;
+        font-weight: bold;
+    }
+     
+    input[disabled] {
+        background-color: lightgray;
+    }
+    </style>
+    <script>
+    function atualizarNome() {
+        const nome = document.getElementById("nome").value;
+        const nivel = parseInt(document.getElementById("nivel").value) || 0;
+        const sufixo = nivel > 30 ? "[MDS CARA PARA]" : nivel > 15 ? "[MESTRE]" : nivel > 5 ? "[VETERANO]" : "[INICIANTE]" ;
+        document.getElementById("nome").value = nome.split(" ")[0] + " " + sufixo;
+    }
+
+    function atualizarPoderDeAtaque() {
+        const forca = parseInt(document.getElementById("forca").value) || 0;
+        const nivel = parseInt(document.getElementById("nivel").value) || 0;
+        const poderDeAtaque = Math.floor((forca - 10) / 2 + nivel / 2);
+        document.getElementById("poder").value = poderDeAtaque;
+    }
+
+    function atualizarDefesa() {
+        const agilidade = parseInt(document.getElementById("agilidade").value) || 0;
+        const armadura = parseInt(document.getElementById("armadura").value) || 0;
+        const defesa = agilidade + armadura;
+        document.getElementById("defesa").value = defesa;
+    }
+
+    function atualizarFicha() {
+        atualizarNome();
+        atualizarPoderDeAtaque();
+        atualizarDefesa();
+    }
+
+    window.onload = function() {
+        document.getElementById("nivel").addEventListener("input", atualizarFicha);
+        document.getElementById("forca").addEventListener("input", atualizarPoderDeAtaque);
+        document.getElementById("agilidade").addEventListener("input", atualizarDefesa);
+        document.getElementById("armadura").addEventListener("input", atualizarDefesa);
+        document.getElementById("nome").addEventListener("input", atualizarNome);
+    }
+    </script>
+</head>
+<body>
+    <h2>Ficha de RPG</h2>
+    <p>
+        <label>Nome:</label>
+        <input type="text" id="nome" />
+        <label>Nível:</label>
+        <input type="number" id="nivel" />
+    </p>
+    <p>
+        <label>Força:</label>
+        <input type="number" id="forca" />
+        <label>Poder de Ataque:</label>
+        <input type="number" id="poder" disabled />
+    </p>
+    <p>
+        <label>Agilidade:</label>
+        <input type="number" id="agilidade" />
+        <label>Armadura:</label>
+        <input type="number" id="armadura" />
+        <label>Defesa:</label>
+        <input type="number" id="defesa" disabled />
+    </p>
+</body>
+</html>
